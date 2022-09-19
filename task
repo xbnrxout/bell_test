@@ -1,0 +1,38 @@
+Back-End Web Service Assignment for Senior Software Developer
+Deadline to submit your solution: Four (4) days from the time we sent this assignment to you
+How to Submit Your Solution:
+Host your solution as a GitHub public repository and provide us its URL.
+Language and Frameworks:
+Java or JavaScript; you are free to choose the frameworks and libraries at your choice, such as
+maven, npm, spring, spring boot, node, express, etc.
+Storage: In-memory or embedded database
+Problem:
+After the contagious pandemic is over, Panoramic Hotel is now accepting booking of its only
+presidential suite. You are going to design and develop a back-end service to provide the REST APIs to
+manage the booking of the presidential suite. Each booking allows up to 3 people for up to 3 days.
+Solution: Provide REST APIs for
+
+1. Booking the presidential suite. The user provides the following:
+   • Email, first name and last name of the principal guest
+   • Number of people, including the principal guest
+   • Check-in and check-out dates
+   Upon success, the system returns the following:
+   • A unique reservation identifier
+   • How to retrieve and cancel the reservation
+2. Retrieving a reservation with its identifier
+3. Cancelling a reservation with its identifier
+   We are Looking for:
+4. A well-written README.md file which includes the following:
+   • The language, framework, and the storage you used
+   • How to compile and run your solution
+   • How to run the tests
+   • The test coverage
+   • Any other information you want us to know
+5. The REST APIs that can be called for example using Postman or curl.
+6. NO user interface please.
+7. Clean and clear code with high test coverage
+8. Robust and elegant error handling
+9. Good git habit
+10. The appropriate HTTP methods for different purposes with correct response status codes
+11. As it is highly likely that multiple guests may book the presidential suite for the same or
+    overlapping dates, prove with tests that your service can gracefully handle this scenario.
