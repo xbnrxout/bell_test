@@ -13,14 +13,14 @@ const reservationPOST = Joi.object({
   "checkIn and checkOut range must be at most 3 days"
 );
 
-const data = {
-  firstName: "Xavier",
-  lastName: "Remacle",
-  guestNumber: 5,
-  email: "test@test.com",
-  checkIn: "11-30-2020",
-  checkOut: "12-30-2020",
-};
+// const data = {
+//   firstName: "Xavier",
+//   lastName: "Remacle",
+//   guestNumber: 5,
+//   email: "test@test.com",
+//   checkIn: "11-30-2020",
+//   checkOut: "12-30-2020",
+// };
 
 // const result = reservationPOST.validate(data);
 
