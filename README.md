@@ -10,19 +10,46 @@ Storage: In-Memory
 
 Simple Booking Application
 
-> POST ??
-> GET ??
-> PATCH ??
+Considerations:
+
+- No leap year.
+- names, email, and identifiers are hashed and stored properly
+
+> POST /api/v1/reservations  
+> GET ??  
+> PATCH ??  
 > PUT ??
 
 ## Installation
 
-Use [npm][npm] to install
+Use [npm] to install
 
 > `npm i`
 
-## Usage
+## Commands
+
+> How to run: `npm run start`
+>
+> - runs on localhost, port 3000
+> - 127.0.0.1:3000
 
 > Coverage testing: `npm run coverage`  
-> Unit testing: `npm run unit`
-> How to run: `npm run start`
+>  Unit testing: `npm run test`
+
+## Usage
+
+## Create reservation
+
+### POST - /api/v1/reservation
+
+> ```
+> body
+> {
+>   "firstName": "Xavier",
+>   "lastName": "Remacle",
+>   "guestNumber": 5,
+>   "email": "test@test.com",
+>   "checkIn": "01-01-2020",
+>   "checkOut": "01-31-2021"
+> }
+> ```
