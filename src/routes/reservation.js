@@ -137,7 +137,7 @@ router.post(
       const bookingId = `${userDetails.email.split("@")[0]}_${now}`;
       const createReservationResult = createReservation(userDetails, bookingId);
       if (createReservationResult) {
-        res.status(200).send({
+        res.status(201).send({
           status: "ok",
           bookingId,
           delete: `/api/v1/reservation/${bookingId}`,
