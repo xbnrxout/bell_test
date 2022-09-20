@@ -16,9 +16,9 @@ Considerations:
 - names, email, and identifiers are hashed and stored properly
 
 > POST /api/v1/reservations  
-> GET ??  
-> PATCH ??  
-> PUT ??
+> GET /api/v1/reservations
+> GET /api/v1/reservations/all
+> DELETE /api/v1/reservations
 
 ## Installation
 
@@ -53,3 +53,19 @@ Use [npm] to install
 >   "checkOut": "01-31-2021"
 > }
 > ```
+
+## Delete reservation
+
+### DELETE - /api/v1/reservation/:bookingId
+
+> no body
+
+## GET reservation
+
+### GET - /api/v1/reservation/:bookingId
+
+> no body
+
+## Postman
+
+> attached is the postman collection you can use to test this api

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "jest --runInBand",
-    "cov": "jest --coverage",
+    "coverage": "jest --coverage",
     "dev": "nodemon -r src/index.js"
   },
   "repository": {

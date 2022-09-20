@@ -1,5 +1,6 @@
 const request = require("supertest");
 const app = require("../src/app");
+const reservation = require("../src/routes/reservation");
 
 let validBookingId;
 
@@ -100,10 +101,33 @@ test("Should get reservation with bookingId", async () => {
   });
 });
 
+test("Should delete reservation with bookingId", async () => {
+  console.log("valid booking id: ", validBookingId);
+
+  const url = `/api/v1/reservation/${validBookingId}`;
+  console.log(url);
+  const response = await request(app).delete(url).send({}).expect(204);
+
+  // expect(response.body).toStrictEqual({
+  //   getBookingResult: {
+  //     checkIn: "2020-12-31T05:00:00.000Z",
+  //     checkOut: "2021-01-01T05:00:00.000Z",
+  //   },
+  // });
+});
+
 test("Should fail get reservation with bookingId", async () => {
   console.log("valid booking id: ", validBookingId);
 
   const url = `/api/v1/reservation/${validBookingId}_123123`;
+  console.log(url);
+  const response = await request(app).get(url).send({}).expect(404);
+});
+
+test("Should not get reservation with bookingId", async () => {
+  console.log("valid booking id: ", validBookingId);
+
+  const url = `/api/v1/reservation/${validBookingId}`;
   console.log(url);
   const response = await request(app).get(url).send({}).expect(404);
 });
