@@ -7,7 +7,7 @@ module.exports = function (schema) {
       next();
     } else {
       const message = error.details[0].message;
-      if (error.isJoi) res.status(422).send({ message });
+      res.status(422).send({ message });
     }
   };
 };
