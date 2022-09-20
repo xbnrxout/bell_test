@@ -69,3 +69,17 @@ Use [npm] to install
 ## Postman
 
 > attached is the postman collection you can use to test this api
+
+## Coverage
+
+| File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          |
+| -------------------- | ------- | -------- | ------- | ------- | -------------------------- |
+| All files            | 94.65   | 65.78    | 93.75   | 94.53   |
+| src                  | 100     | 100      | 100     | 100     |
+| app.js               | 100     | 100      | 100     | 100     |
+| src/joi              | 100     | 100      | 100     | 100     |
+| reservationSchema.js | 100     | 100      | 100     | 100     |
+| src/middleware       | 100     | 100      | 100     | 100     |
+| validate.js          | 100     | 100      | 100     | 100     |
+| src/routes           | 93.85   | 63.88    | 92.85   | 93.69   |
+| reservation.js       | 93.85   | 63.88    | 92.85   | 93.69   | 51,178-179,240-241,271,276 |
