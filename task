@@ -1,15 +1,18 @@
 Back-End Web Service Assignment for Senior Software Developer
 Deadline to submit your solution: Four (4) days from the time we sent this assignment to you
+
 How to Submit Your Solution:
 Host your solution as a GitHub public repository and provide us its URL.
+
 Language and Frameworks:
-Java or JavaScript; you are free to choose the frameworks and libraries at your choice, such as
-maven, npm, spring, spring boot, node, express, etc.
+Java or JavaScript; you are free to choose the frameworks and libraries at your choice, such as maven, npm, spring, spring boot, node, express, etc.
+
 Storage: In-memory or embedded database
+
 Problem:
 After the contagious pandemic is over, Panoramic Hotel is now accepting booking of its only
-presidential suite. You are going to design and develop a back-end service to provide the REST APIs to
-manage the booking of the presidential suite. Each booking allows up to 3 people for up to 3 days.
+presidential suite. You are going to design and develop a back-end service to provide the REST APIs to manage the booking of the presidential suite. Each booking allows up to 3 people for up to 3 days.
+
 Solution: Provide REST APIs for
 
 1. Booking the presidential suite. The user provides the following:
