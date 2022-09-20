@@ -1,6 +1,8 @@
 const request = require("supertest");
 const app = require("../src/app");
 
+let validBookingId;
+
 test("Should create reservation for user", async () => {
   const response = await request(app)
     .post("/api/v1/reservation")
@@ -13,6 +15,9 @@ test("Should create reservation for user", async () => {
       checkOut: "01-01-2021",
     })
     .expect(201);
+
+  validBookingId = response.body.bookingId;
+  console.log(response.body);
 });
 
 test("Should fail create reservation for user schema validation", async () => {
@@ -68,4 +73,37 @@ test("Should fail create reservation for user as reservation have more that 3 pe
       checkOut: "01-01-2022",
     })
     .expect(422);
+});
+
+test("Should get all reservations", async () => {
+  console.log("valid booking id: ", validBookingId);
+
+  const url = `/api/v1/reservation/all`;
+  console.log(url);
+  const response = await request(app).get(url).send({}).expect(200);
+
+  console.log(response.body);
+});
+
+test("Should get reservation with bookingId", async () => {
+  console.log("valid booking id: ", validBookingId);
+
+  const url = `/api/v1/reservation/${validBookingId}`;
+  console.log(url);
+  const response = await request(app).get(url).send({}).expect(200);
+
+  expect(response.body).toStrictEqual({
+    getBookingResult: {
+      checkIn: "2020-12-31T05:00:00.000Z",
+      checkOut: "2021-01-01T05:00:00.000Z",
+    },
+  });
+});
+
+test("Should fail get reservation with bookingId", async () => {
+  console.log("valid booking id: ", validBookingId);
+
+  const url = `/api/v1/reservation/${validBookingId}_123123`;
+  console.log(url);
+  const response = await request(app).get(url).send({}).expect(404);
 });

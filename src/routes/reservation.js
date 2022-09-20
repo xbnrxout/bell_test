@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const { reservationPOST } = require("../joi/reservationSchema");
+const { reservationPOST, reservationGET } = require("../joi/reservationSchema");
 const validate = require("../middleware/validate");
 
 let reservations = {};
@@ -13,8 +13,6 @@ function getDayOfYear(date) {
 }
 
 function createCalendarYear(year) {
-  console.log(`Creating calendar year for ${year}`);
-
   let yearCalendar = {};
   for (let i = 1; i <= 366; i++) {
     yearCalendar[i] = { booked: false, bookingId: undefined };
@@ -23,7 +21,6 @@ function createCalendarYear(year) {
 }
 
 function createReservation(userDetails, bookingId) {
-  console.log("Creating Reservation");
   const dayOfYearCheckIn = getDayOfYear(userDetails.checkIn);
   const dayOfYearCheckOut = getDayOfYear(userDetails.checkOut);
   const yearWrapIndicator = dayOfYearCheckIn > dayOfYearCheckOut;
@@ -34,12 +31,6 @@ function createReservation(userDetails, bookingId) {
     i <= (yearWrapIndicator ? 366 : dayOfYearCheckOut);
     i++
   ) {
-    console.log(`i: ${i}`);
-
-    console.log(
-      `Statement: ${i <= (yearWrapIndicator ? 366 : dayOfYearCheckOut)}`
-    );
-
     reservations[checkInYear][i].booked = true;
     reservations[checkInYear][i].bookingId = bookingId;
   }
@@ -47,10 +38,6 @@ function createReservation(userDetails, bookingId) {
   if (yearWrapIndicator) {
     const checkOutYear = userDetails.checkOut.getFullYear();
     for (let i = 1; i <= dayOfYearCheckOut; i++) {
-      console.log(
-        `Statement: ${i <= (yearWrapIndicator ? 366 : dayOfYearCheckOut)}`
-      );
-
       reservations[checkOutYear][i].booked = true;
       reservations[checkOutYear][i].bookingId = bookingId;
     }
@@ -61,18 +48,12 @@ function createReservation(userDetails, bookingId) {
     checkOut: userDetails.checkOut,
   };
 
-  console.log(`bookings: ${JSON.stringify(bookings)}`);
-
   return true;
 }
 
 function checkAvailability(checkIn, checkOut) {
-  console.log("Checking Availability");
   const checkInYear = checkIn.getFullYear();
   const checkOutYear = checkOut.getFullYear();
-
-  console.log(`checkInYear: ${checkInYear}`);
-  console.log(`year exists?: ${reservations?.[checkInYear]}`);
 
   if (!reservations?.[checkInYear]) {
     createCalendarYear(checkInYear);
@@ -84,21 +65,15 @@ function checkAvailability(checkIn, checkOut) {
 
   const dayOfYearCheckIn = getDayOfYear(checkIn);
   const dayOfYearCheckOut = getDayOfYear(checkOut);
-  console.log(`inDate: ${checkIn}\noutDate: ${checkOut}`);
-  console.log(`in: ${dayOfYearCheckIn}\nout: ${dayOfYearCheckOut}`);
 
   const yearWrapIndicator = checkInYear != checkOutYear;
-  console.log(`Year wrapped: ${yearWrapIndicator}`);
 
   for (
     let i = dayOfYearCheckIn;
     i <= (yearWrapIndicator ? 366 : dayOfYearCheckOut);
     i++
   ) {
-    console.log(`Booked?: ${reservations[checkInYear][i].booked}`);
-
     if (reservations[checkInYear][i].booked) {
-      console.log("\t day is booked exiting...");
       return false;
     }
   }
@@ -106,7 +81,6 @@ function checkAvailability(checkIn, checkOut) {
   if (yearWrapIndicator) {
     for (let i = 0; i++; i <= dayOfYearCheckOut) {
       if (reservations[dayOfYearCheckOut][i].booked) {
-        console.log("\t day is booked exiting...");
         return false;
       }
     }
@@ -120,10 +94,6 @@ router.post(
   "/api/v1/reservation",
   validate(reservationPOST),
   async (req, res) => {
-    console.log(
-      `Checking Reservation obj: ${JSON.stringify(reservations?.[2020]?.[366])}`
-    );
-
     const userDetails = { ...req.body };
     const checkIn = new Date(userDetails.checkIn);
     const checkOut = new Date(userDetails.checkOut);
@@ -150,11 +120,20 @@ router.post(
   }
 );
 
+router.get("/api/v1/reservation/all", async (req, res) => {
+  res.status(200).send(JSON.stringify(bookings));
+});
+
 //GET reservation
 router.get("/api/v1/reservation/:bookingId", async (req, res) => {
-  const dates = Object.keys(reservations);
-  res.status(200).send({ dates });
+  const bookingId = req.params.bookingId;
+  const getBookingResult = bookings?.[bookingId];
+  if (getBookingResult) {
+    res.status(200).send({ getBookingResult });
+  } else {
+    res.status(404).send();
+  }
 });
 
 module.exports = router;
-// req.params.id;
+// re
